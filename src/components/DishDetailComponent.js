@@ -31,7 +31,17 @@ class DishDetail extends Component {
         return (
           <ul key={comment.id} className="list-unstyled">
             <li>{comment.comment}</li>
-            <li> -- {comment.author + ", " + comment.date}</li>
+            <li>
+              {" "}
+              --{" "}
+              {comment.author +
+                ", " +
+                Intl.DateTimeFormat("en-US", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                }).format(new Date(Date.parse(comment.date)))}
+            </li>
           </ul>
         );
       });
@@ -50,9 +60,11 @@ class DishDetail extends Component {
     const dish = this.props.dish;
     if (dish != null) {
       return (
-        <div className="row">
-          {this.renderDish(dish)}
-          {this.renderComment(dish.comments)}
+        <div className="container">
+          <div className="row">
+            {this.renderDish(dish)}
+            {this.renderComment(dish.comments)}
+          </div>
         </div>
       );
     } else {
