@@ -25,8 +25,15 @@ class Contact extends Component {
   }
 
   handleSubmit(values) {
-    console.log(JSON.stringify(values));
-    alert(JSON.stringify(values));
+    this.props.postFeedback(
+      values.firstname,
+      values.lastname,
+      values.telnum,
+      values.email,
+      values.contactType,
+      values.message
+    );
+    alert("Thank you for your feedback " + JSON.stringify(values));
     this.props.resetFeedbackForm();
   }
 
@@ -249,7 +256,7 @@ class Contact extends Component {
                 <Col md={10}>
                   <Control.textarea
                     model=".message"
-                    id="feedback"
+                    id="message"
                     name="message"
                     className="form-control"
                     rows="12"
